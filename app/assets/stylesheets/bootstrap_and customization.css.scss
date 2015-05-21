@@ -1,2 +1,17 @@
+
+$navbar-default-brand-color:        white;
+$navbar-default-bg:                 #34495E;
+$navbar-height:                     45px;
+$brand-primary:                     #28FE46;
+$navbar-default-link-color:         #FFFFFF;
+
 @import 'bootstrap';
+
+.center { 
+    text-align: center;
+} 
+
+.navbar-brand { 
+    font-weight: bold;
+}
 
