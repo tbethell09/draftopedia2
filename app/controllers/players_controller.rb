@@ -29,12 +29,16 @@ class PlayersController < ApplicationController
   def update
     @player.update(player_params)
     respond_with(@player)
+  
   end
 
   def destroy
     @player.destroy
     respond_with(@player)
   end
+
+
+
 
   private
     def set_player
