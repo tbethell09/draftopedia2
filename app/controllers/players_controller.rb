@@ -49,8 +49,8 @@ class PlayersController < ApplicationController
     end
     
     def correct_user
-      @player = current_user.player.find(params[:id])
-      redirect_to player_path if @player.nil?
+      @player = current_user.player.find_by(id: params[:id])
+      redirect_to player_path, notice: "Not authorized to edit this Player" if @player.nil?
     end
 
     def player_params
