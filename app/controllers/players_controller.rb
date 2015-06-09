@@ -1,5 +1,8 @@
 class PlayersController < ApplicationController
-  before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :set_player,          only: [:show, :edit, :update, :destroy]
+  before_action :correct_user,        only: [:edit, :upadate, :destory]
+  before_action :authenticate_user!,  except: [:index, :show]
+  
 
   respond_to :html
 
@@ -13,7 +16,7 @@ class PlayersController < ApplicationController
   end
 
   def new
-    @player = Player.new
+    @player = current_user.players.build
     respond_with(@player)
   end
 
@@ -21,7 +24,7 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(player_params)
+    @player = current_user.players.build(player_params)
     @player.save
     respond_with(@player)
   end
@@ -43,6 +46,11 @@ class PlayersController < ApplicationController
   private
     def set_player
       @player = Player.find(params[:id])
+    end
+    
+    def correct_user
+      @player = current_user.player.find(params[:id])
+      redirect_to player_path if @player.nil?
     end
 
     def player_params
